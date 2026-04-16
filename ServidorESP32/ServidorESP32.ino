@@ -1,13 +1,12 @@
 #include <WiFi.h>
 #include <WebServer.h>
 
-const char* ssid     = "INFINITUMC200";
-const char* password = "devtonics";
+const char* ssid     = "INFINITUMC300";
+const char* password = "4bChf4aFcP";
 
 WebServer server(80);
 const int LED_PIN = 2;
 
-// ---- Página principal con los botones ----
 void handleRoot() {
   bool ledState = digitalRead(LED_PIN);
 
@@ -37,14 +36,14 @@ void handleOn() {
   digitalWrite(LED_PIN, HIGH);
   // Redirige de vuelta al inicio para ver el estado actualizado
   //server.sendHeader("Location", "/");
-  server.send(200, "text/html", "Led encendido<br><ahref=\"/\">Volver</a>");
+  server.send(200, "text/html", "Led encendido<br><a href=\"/\">Volver</a>");
 }
 
 // ---- Ruta /off ----
 void handleOff() {
   digitalWrite(LED_PIN, LOW);
   //server.sendHeader("Location", "/");
-  server.send(200, "text/html", "Led encendido<br><ahref=\"/\">Volver</a>");
+  server.send(200, "text/html", "Led encendido<br><a href=\"/\">Volver</a>");
 }
 
 void setup() {
