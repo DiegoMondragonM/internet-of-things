@@ -10,6 +10,11 @@ const char* password = "devtonics";
 // ── Servidor web en puerto 80 ───────────────────────────────────────────────
 WebServer server(80);
 
+float latitude=18.37;
+float longitude=-97.37;
+String Json="";
+const int ledPin=14;
+int ledstate=LOW;
 // ── Página HTML embebida ────────────────────────────────────────────────────
 // El contenido viene del archivo index.html convertido a string raw
 const char* htmlPage = R"rawliteral(
@@ -93,8 +98,7 @@ void handleRoot() {
   server.send(200, "text/html", htmlPage);
 }
 
-float latitude=18.37;
-float longitude=-97.37;
+
 // ── Handler GET /weather ────────────────────────────────────────────────────
 void handleWeather() {
   if (WiFi.status() != WL_CONNECTED) {
@@ -124,6 +128,7 @@ void handleWeather() {
 
     if (!error) {
       float temperatura = doc["current_weather"]["temperature"];
+      int is_Day=doc["current_weather"]["is_day"];
       http.end();
       server.send(200, "text/plain", String(temperatura, 1));
       return;
